@@ -112,8 +112,7 @@ def seed_database():
                 "service_name": "Assessment",
                 "description": "In-house professional will evaluate the effectiveness of our treatments, identify areas for improvement, and ensure we provide the highest level of care tailored to your needs.",
                 "classifications": [
-                    {"classification_name": "(Reoccurring)", "price": 500.00, "duration_minutes": 15},
-                    {"classification_name": "(First Time)", "price": 0.00, "duration_minutes": 15}
+                    {"classification_name": "(Reoccurring)", "price": 500.00, "duration_minutes": 15}
                 ]
             }
         ]
