@@ -1,0 +1,33 @@
+{% extends 'base.html' %} {% block content %}
+<h2>Receipt</h2>
+{% if tx %}
+<div class="card">
+  <div><strong>Transaction Code:</strong> {{ tx.code }}</div>
+  <div><strong>Customer:</strong> {{ tx.customer_name or '—' }}</div>
+  <div>
+    <strong>Therapist:</strong> {{ tx.therapist.name if tx.therapist else '—' }}
+  </div>
+  <div><strong>Room:</strong> {{ tx.room_number or '—' }}</div>
+  <ul>
+    {% for it in tx.items %}
+    <li>
+      {{ it.service.name }} - ₱{{ '%.2f'|format(it.price) }} ({{
+      it.duration_minutes }}m)
+    </li>
+    {% endfor %}
+  </ul>
+  <div><strong>Total:</strong> ₱{{ '%.2f'|format(tx.total_amount) }}</div>
+  {% if tx.payment %}
+  <div>
+    <strong>Paid:</strong> ₱{{ '%.2f'|format(tx.payment.amount_paid) }} ({{
+    tx.payment.method }})
+  </div>
+  <div>
+    <strong>Change:</strong> ₱{{ '%.2f'|format(tx.payment.change_amount) }}
+  </div>
+  <div><strong>Date:</strong> {{ tx.payment.created_at }}</div>
+  {% endif %}
+</div>
+{% else %}
+<p>Transaction not found.</p>
+{% endif %} {% endblock %}

@@ -1,0 +1,36 @@
+{% extends 'base.html' %} {% block content %}
+<div class="cashier-page-container">
+  <div class="controls">
+    <div id="cashier_name" hidden>
+      <p>{{cashier_name}}</p>
+    </div>
+    <div class="controls-container">
+      <div id="counter_number" class="cashier-counter-badge">
+        COUNTER {{counter_number}}
+      </div>
+      <button id="pick_next" class="cashier-confirm-button">
+        CONFIRM (FIFO)
+      </button>
+      <a
+        href="/logout/cashier"
+        onclick="sessionStorage.removeItem('cashier_auth_token');"
+        >Logout</a
+      >
+    </div>
+  </div>
+  <div class="cashier-pending-services-container">
+    <section class="cashier-pending-services">
+      <ul id="cashier_waiting"></ul>
+    </section>
+  </div>
+  <!-- <div class="cashier-payment-container">
+    <section class="cashier-payment-section">
+      <h3>Assigned To You</h3>
+      <ul id="cashier_assigned"></ul>
+      <h3>Payment</h3>
+      <div id="payment_panel"></div>
+    </section>
+  </div> -->
+</div>
+<script src="/static/js/cashier.js"></script>
+{% endblock %}

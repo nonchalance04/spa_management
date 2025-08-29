@@ -1,0 +1,38 @@
+{% extends 'base.html' %} {% block content %}
+<!-- <h2>Monitor</h2> -->
+<audio
+  id="notifySound"
+  src="/static/notification_sound.mp3"
+  preload="auto"
+></audio>
+
+<div class="monitor-container">
+  <div class="waiting-container">
+    <div class="monitor-heading">
+      <p>WAITING</p>
+    </div>
+    <div id="waiting_therapist"></div>
+  </div>
+  <section>
+    <h3>Confirmed / To Room</h3>
+    <div id="confirmed"></div>
+  </section>
+  <section>
+    <h3>In Service</h3>
+    <ul id="in_service"></ul>
+  </section>
+  <section>
+    <h3>Finished / Waiting Payment</h3>
+    <ul id="finished"></ul>
+  </section>
+  <section>
+    <h3>Go To Cashier</h3>
+    <ul id="payment_assigned"></ul>
+  </section>
+  <section>
+    <h3>Paid / Completed</h3>
+    <ul id="paid"></ul>
+  </section>
+  <script src="/static/js/monitor.js"></script>
+  {% endblock %}
+</div>

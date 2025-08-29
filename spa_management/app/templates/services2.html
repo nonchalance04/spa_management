@@ -1,0 +1,126 @@
+{% extends 'base.html' %} {% block content %}
+<header>
+  <div class="logo-container">
+    <a href="/">
+      <img src="/static/img/logo.png" alt="" />
+    </a>
+  </div>
+  <div class="service-link">
+    <a href="/services1" class="site-link">Signature Massage</a>
+  </div>
+  <div class="service-link">
+    <a href="/services2" class="site-link">Holistic Recovery</a>
+  </div>
+</header>
+<div
+  class="customer-services-description-container services2-description-container"
+>
+  <h1>Holistic Recovery</h1>
+  <p>
+    Explore our tailored treatments-from Myofascial Release for muscle relief,
+    to Cupping Therapy for circulation, to Sports Massage for performance and
+    recovery-designed to support lasting well-being.
+  </p>
+</div>
+<div class="services-cards-container">
+  <div class="services-card" data-title="Myofascial Release">
+    <div class="service-image-container">
+      <img src="/static/img/services2_page/card1.jpg" alt="" />
+    </div>
+    <h3>MYOFASCIAL RELEASE</h3>
+  </div>
+  <div class="services-card" data-title="Cupping Therapy">
+    <div class="service-image-container">
+      <img src="/static/img/services2_page/card2.jpg" alt="" />
+    </div>
+    <h3>CUPPING THERAPY</h3>
+  </div>
+  <div class="services-card" data-title="Sports Massage">
+    <div class="service-image-container">
+      <img src="/static/img/services2_page/card3.jpg" alt="" />
+    </div>
+    <h3>SPORTS MASSAGE</h3>
+  </div>
+  <div class="services-card" data-title="Assessment">
+    <div class="service-image-container">
+      <img src="/static/img/services2_page/card4.jpg" alt="" />
+    </div>
+    <h3>ASSESSMENT</h3>
+  </div>
+</div>
+
+<section class="cart-container close">
+  <div class="cart-container-header">
+    <div class="cart-header-container">
+      <div class="cart-header-image-container">
+        <img src="/static/img/cart-image.avif" alt="" />
+      </div>
+      <div class="cart-header-details-container">
+        <p class="shop-name">Cedar Wellness SPA</p>
+        <p class="shop-address">
+          3rd floor Holy Spirit Dr., Quezon City, Metro Manila
+        </p>
+      </div>
+    </div>
+    <div class="arrow-icon-container toggle">
+      <img src="/static/img/right-arrow.png" alt="" />
+    </div>
+  </div>
+  <ul id="cart"></ul>
+  <div class="cart-total">
+    <p>Total:</p>
+    <div class="cart-total-amount-container">₱<span id="total">0.00</span></div>
+  </div>
+  <!-- <div>
+    <label
+      >Customer Name: <input id="customer_name" placeholder="Optional"
+    /></label>
+  </div> -->
+
+  <button id="confirm" class="cart-confirm-btn" disabled>
+    Confirm Selection
+  </button>
+</section>
+
+<!-- Services List Modal -->
+<div id="services_modal" class="modal hidden">
+  <div class="modal_backdrop"></div>
+  <div class="modal_content">
+    <div class="modal_header">
+      <h3 id="services_modal_title" class="services-title">Services</h3>
+      <div id="service-description"></div>
+      <h4 style="margin-block: 10px; color: #902726">Select an option:</h4>
+    </div>
+    <div class="modal_body">
+      <ul id="services_modal_list"></ul>
+    </div>
+    <div class="modal_footer">
+      <button id="services_modal_confirm" class="confirm-btn" disabled>
+        Add to List
+      </button>
+      <!-- <button id="services_modal_close">Close</button> -->
+    </div>
+  </div>
+</div>
+
+<!-- Confirmation Modal -->
+<div id="confirm_modal" class="modal hidden">
+  <div class="modal_backdrop"></div>
+  <div class="modal_content">
+    <div class="modal_header">
+      <h3>Confirmation</h3>
+    </div>
+    <div class="modal_body">
+      <p>Transaction Code: <strong id="modal_txn_code"></strong></p>
+      <h4>Selected Services</h4>
+      <ul id="modal_items"></ul>
+      <div class="total">Total: ₱<span id="modal_total">0.00</span></div>
+    </div>
+    <div class="modal_footer">
+      <button id="print_receipt" class="print-btn">Print Receipt</button>
+      <button id="modal_close">OK</button>
+    </div>
+  </div>
+</div>
+<script src="/static/js/customer.js"></script>
+{% endblock %}

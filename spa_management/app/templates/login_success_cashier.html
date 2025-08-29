@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Success</title>
+    <script>
+        // Store the auth token in sessionStorage (per-tab)
+        sessionStorage.setItem('cashier_auth_token', '{{ token }}');
+        
+        // Redirect to the cashier page
+        window.location.href = '{{ redirect_url }}?auth_token={{ token }}';
+    </script>
+</head>
+<body>
+    <p>Login successful. Redirecting...</p>
+</body>
+</html>

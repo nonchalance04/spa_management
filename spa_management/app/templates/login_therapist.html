@@ -1,0 +1,39 @@
+{% extends 'base.html' %} {% block content %}
+<div class="therapist-login-page-container">
+  <div class="login-container">
+    <h2>Your journey starts here</h2>
+    <p>Take the first step</p>
+    <form method="post" action="/login/therapist">
+      <div class="input-group">
+        <span class="input-label">Username:</span>
+        <input type="text" name="username" required />
+      </div>
+
+      <div class="input-group">
+        <span class="input-label room-label">Room:</span>
+        <input name="room_number" />
+      </div>
+
+      <div class="input-group">
+        <span class="input-label">Password:</span>
+        <input type="password" id="password" name="password" />
+        <span class="toggle-password" onclick="togglePassword()">👁</span>
+      </div>
+      <button type="submit" class="login-btn">Login</button>
+      {% if error %}
+      <p style="color: red">{{ error }}</p>
+      {% endif %}
+    </form>
+  </div>
+  <script>
+    function togglePassword() {
+      const passwordInput = document.getElementById("password");
+      if (passwordInput.type === "password") {
+        passwordInput.type = "text";
+      } else {
+        passwordInput.type = "password";
+      }
+    }
+  </script>
+  {% endblock %}
+</div>

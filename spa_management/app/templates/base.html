@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SPA System</title>
+    <link rel="stylesheet" href="/static/css/styles.css" />
+    <!-- <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script> -->
+    <script src="/static/extensions/socket.io.min.js"></script>
+    <!--Need nasa loob ng static folder yung extensions folder, di maread extensions folder pag wala sa static folder-->
+  </head>
+  <body>
+    <script>
+      // Ensure auth_token is consistently present in URL for SSR token-first auth
+      (function () {
+        try {
+          var path = location.pathname;
+          console.log(path);
+          var tokenKey = null;
+          if (
+            path === "/therapist" ||
+            path === "/therapist/service-management"
+          ) {
+            tokenKey = "therapist_auth_token";
+          } else if (path === "/cashier") {
+            tokenKey = "cashier_auth_token";
+          }
+          if (!tokenKey) return;
+
+          var url = new URL(location.href);
+          var urlToken = url.searchParams.get("auth_token");
+          var storageToken = null;
+          try {
+            storageToken = sessionStorage.getItem(tokenKey);
+          } catch (e) {}
+
+          // If URL already carries token, keep sessionStorage in sync and proceed
+          if (urlToken) {
+            if (storageToken !== urlToken) {
+              try {
+                sessionStorage.setItem(tokenKey, urlToken);
+              } catch (e) {}
+            }
+            return;
+          }
+
+          // If URL is missing token but sessionStorage has it, reload with token in URL
+          if (storageToken) {
+            url.searchParams.set("auth_token", storageToken);
+            location.replace(url.toString());
+          }
+        } catch (e) {
+          // no-op on errors
+        }
+      })();
+    </script>
+    {% if request.path in ['/login/therapist', '/login/cashier', '/therapist',
+    '/cashier', '/', '/about', '/therapist/service-management', '/monitor' ,
+    '/cashier/payment-management']%}
+    <header class="home-header">
+      <div class="company-logo-container">
+        <a href="/">
+          <img src="/static/img/logo.png" alt="" />
+        </a>
+      </div>
+      <div class="customer-time date" id="time"></div>
+      <div class="customer-day date" id="day"></div>
+      <div class="customer-date date" id="date"></div>
+    </header>
+    {% endif %}
+    <main>{% block content %}{% endblock %}</main>
+    {% if request.path in ['/login/therapist', '/login/cashier', '/therapist',
+    '/cashier', '/', '/about', '/therapist/service-management', '/monitor' ,
+    '/cashier/payment-management']%}
+    <script>
+      // Customer page header time/date/day
+      function updateClock() {
+        const now = new Date();
+
+        // Time
+        let hours = now.getHours();
+        let minutes = now.getMinutes();
+        let seconds = now.getSeconds();
+        let ampm = hours >= 12 ? "PM" : "AM";
+        hours = hours % 12 || 12; // Convert to 12-hour format
+
+        // Add leading zero
+        hours = String(hours).padStart(2, "0");
+        minutes = String(minutes).padStart(2, "0");
+        seconds = String(seconds).padStart(2, "0");
+
+        // Day
+        const days = [
+          "Sunday",
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+        ];
+        let day = days[now.getDay()];
+
+        // Date
+        const options = { year: "numeric", month: "long", day: "numeric" };
+        let date = now.toLocaleDateString(undefined, options);
+
+        // Display
+        document.getElementById(
+          "time"
+        ).textContent = `${hours}:${minutes}:${seconds} ${ampm}`;
+        document.getElementById("day").textContent = day;
+        document.getElementById("date").textContent = date;
+      }
+
+      // Update every second
+      setInterval(updateClock, 1000);
+      updateClock(); // run once immediately
+    </script>
+    {% endif %}
+  </body>
+</html>

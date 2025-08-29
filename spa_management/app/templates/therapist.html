@@ -1,0 +1,47 @@
+{% extends 'base.html' %} {% block content %}
+<div class="therapist-page-container">
+  <div class="controls">
+    <!-- <label
+    >Name
+    <input
+      id="therapist_name"
+      placeholder="Therapist 1"
+      value="{{ therapist_name or '' }}"
+  /></label> -->
+    <!-- <div id="therapist_name">
+      <p>{{therapist_name}}</p>
+    </div> -->
+    <!-- <label
+    >Room
+    <input id="room_number" placeholder="101" value="{{ room_number or '' }}"
+  /></label> -->
+    <div class="controls-container">
+      <div id="therapist_name" hidden>
+        <p>{{therapist_name}}</p>
+      </div>
+      <div id="room_number" class="therapist-room-number">
+        Room {{room_number}}
+      </div>
+      <button id="confirm_next" class="therapist-confirm-button">
+        Confirm FIFO
+      </button>
+      <a href="/therapist/service-management" class="service-management-link">
+        <button class="therapist-confirm-button service-management-button">
+          Service Management
+        </button>
+      </a>
+    </div>
+    <a href="/logout/therapist" onclick="sessionStorage.removeItem('therapist_auth_token');">Logout</a>
+  </div>
+  <div class="therapist-pending-services-container">
+    <section class="therapist-pending-services">
+      <div class="therapist-pending-services-header">
+        <h3>Waiting Queue</h3>
+        <h3 class="pending-service-header-code">Code</h3>
+      </div>
+      <ul id="waiting_queue"></ul>
+    </section>
+  </div>
+</div>
+<script src="/static/js/therapist_queue.js"></script>
+{% endblock %}

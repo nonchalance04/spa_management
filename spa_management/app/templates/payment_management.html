@@ -1,0 +1,27 @@
+{% extends 'base.html' %} {% block content %}
+<div class="spa-service-page">
+  <div class="spa-service-container">
+    <div class="service-management-header">
+      <a href="/cashier" class="back-to-cashier-link">
+        <button class="back-to-cashier-button">← Back to Queue</button>
+      </a>
+    </div>
+    <div class="counter-badge">
+      <span id="counter_display">COUNTER {{ counter_number or '1' }}</span>
+    </div>
+    <div class="payment-card-main">
+      <div id="current_payment_txn">
+        <!-- Default content when no transaction -->
+        <div class="spa-no-transaction">
+          <p>No current transaction. Please go back to the queue to confirm a customer.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Hidden inputs for functionality -->
+  <input type="hidden" id="cashier_name" value="{{ cashier_name or '' }}" />
+  <input type="hidden" id="counter_number" value="{{ counter_number or '' }}" />
+</div>
+<script src="/static/js/payment_management.js"></script>
+{% endblock %}
